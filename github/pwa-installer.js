@@ -16,7 +16,7 @@
   const platform = detectPlatform();
   console.log('📱 Platform detected:', platform);
 
-  // Register service worker - FIXED PATH
+  // Register service worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./service-worker.js')
@@ -55,16 +55,7 @@
     showSuccessMessage();
   });
 
-  // Create install button
-  function createInstallButton() {
-    const button = document.createElement('button');
-    button.id = 'pwa-install-btn';
-    button.innerHTML = `
-      <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle;margin-right:8px;">
-        <path d="M10 3a1 1 0 011 1v5.586l1.293-1.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 9.586V4a1 1 0 011-1z"/>
-        <path d="M4 11a1 1 0 011 1v3a1 1 0 001 1h8a1 1 0 001-1v-3a1 1 0 112 0v3a3 3 0 01-3 3H6a3 3 0 01-3-3v-3a1 1 0 011-1z"/>
-      </svg>
-      Cài ứng dụng
+
     `;
     
     Object.assign(button.style, {
