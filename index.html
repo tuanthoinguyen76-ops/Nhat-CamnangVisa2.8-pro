@@ -1,471 +1,326 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tứ Nhật - Visa · Cẩm nang hồ sơ Visa quốc tế V2.4</title>
-  <meta name="description" content="Cẩm nang hồ sơ Visa quốc tế - Tra cứu thủ tục visa, hồ sơ và quy trình xin visa chi tiết cho từng quốc gia.">
-  <link rel="manifest" href="./github/manifest.json">
-  <link rel="icon" href="./favicon.ico" sizes="any">
-  <meta name="theme-color" content="#4f46e5">
-  
-  <!-- Service Worker Registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./github/sw.js')
-          .then(function(registration) {
-            console.log('Service Worker đã đăng ký thành công:', registration.scope);
-          })
-          .catch(function(error) {
-            console.log('Đăng ký Service Worker thất bại:', error);
-          });
-      });
-    }
-  </script>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-<style>
-    :root{
-      --indigo-600: #4f46e5;
-      --muted: #6b7280;
-    }
-    body { 
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      overflow-x: hidden;
-    }
-    .card { 
-      background: white; 
-      border-radius: 0.6rem; 
-      box-shadow: 0 6px 20px rgba(15,23,42,0.06); 
-      padding: 1.5rem; 
-      margin-bottom: 1rem;
-    }
-    .fade { animation: fadeIn .28s ease-in-out; }
-    @keyframes fadeIn { from {opacity:0; transform:translateY(6px)} to {opacity:1; transform:none} }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cẩm nang Visa Nhật Bản - Hướng dẫn chi tiết về các loại visa, thủ tục và kinh nghiệm xin visa Nhật Bản">
+    <meta name="keywords" content="visa nhật bản, visa japan, xin visa nhật, thủ tục visa">
+    <meta name="author" content="Visa Guide Team">
+    <meta name="theme-color" content="#1976d2">
     
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 280px;
-      background: white;
-      box-shadow: 2px 0 10px rgba(15,23,42,0.08);
-      transform: translateX(-280px);
-      transition: transform 0.3s ease;
-      z-index: 100;
-      overflow-y: auto;
-      padding: 1.5rem;
-    }
+    <title>⚙️ Cài đặt ứng dụng Visa</title>
     
-    .sidebar.open {
-      transform: translateX(0);
-    }
+    <!-- PWA Manifest - Fixed path -->
+    <link rel="manifest" href="./github/manifest.json">
     
-    .content-wrap {
-      margin-left: 0;
-      padding: 2rem 1rem;
-    }
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./github/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./github/icons/icon-512x512.png">
+    <link rel="apple-touch-icon" href="./github/icons/icon-192x192.png">
     
-    .menu-toggle {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      z-index: 101;
-      background: white;
-      border-radius: 0.5rem;
-      padding: 0.75rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: left 0.3s ease;
-    }
-    
-    .menu-toggle.shifted {
-      left: calc(280px + 1rem);
-    }
-    
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      z-index: 99;
-    }
-    
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 280px;
-        max-width: 85vw;
-      }
-      
-      .content-wrap {
-        padding: 1rem 0.5rem;
-      }
-      
-      .menu-toggle {
-        top: 0.75rem;
-        left: 0.75rem;
-      }
-      
-      .menu-toggle.shifted {
-        left: calc(280px + 0.75rem);
-      }
-      
-      header {
-        padding-top: 3.5rem !important;
-        padding-bottom: 2rem !important;
-      }
-      
-      header h1 {
-        font-size: 2rem !important;
-        padding: 0 1rem;
-      }
-      
-      header p {
-        font-size: 1rem !important;
-        padding: 0 1rem;
-      }
-    }
-    
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      overflow-y: auto;
-    }
-    
-    .modal.active {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-    
-    .modal-content {
-      background: #f9fafb;
-      border-radius: 1rem;
-      max-width: 1400px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      animation: slideIn 0.3s ease;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .modal-header {
-      position: sticky;
-      top: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 2rem;
-      border-radius: 1rem 1rem 0 0;
-      z-index: 10;
-    }
-    
-    .modal-body {
-      padding: 2rem;
-    }
-    
-    .close-modal {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-    }
-    
-    .close-modal:hover {
-      background: rgba(255,255,255,0.3);
-      transform: rotate(90deg);
-    }
-    
-    .country-card {
-      background: white;
-      border-radius: 1rem;
-      padding: 2rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 2px solid transparent;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .country-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    
-    .country-card:hover::before {
-      transform: scaleX(1);
-    }
-    
-    .country-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
-      border-color: #667eea;
-    }
-    
-    .country-flag {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    
-    .section-title {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .badge {
-      background: rgba(102, 126, 234, 0.1);
-      color: #667eea;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-    
-    .info-box {
-      background: #eff6ff;
-      border-left: 4px solid #3b82f6;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      margin: 1rem 0;
-    }
-    
-    .warning-box {
-      background: #fef3c7;
-      border-left: 4px solid #f59e0b;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      margin: 1rem 0;
-    }
-</style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features {
+            background: #f7f9fc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .install-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .install-btn:active {
+            transform: translateY(0);
+        }
+
+        .install-btn.hidden {
+            display: none;
+        }
+
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status-message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .install-btn {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-  
-  <button class="menu-toggle" id="menuToggle">
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </button>
+<body>
+    <div class="container">
+        <div class="icon">📱</div>
+        <h1>Cài đặt ứng dụng Visa</h1>
+        <p class="description">
+            Cài đặt ứng dụng Cẩm nang Visa Nhật Bản để truy cập nhanh và sử dụng offline
+        </p>
 
-  <div class="overlay" id="overlay"></div>
+        <div class="features">
+            <div class="feature-item">
+                <span class="feature-icon">✨</span>
+                <span>Truy cập nhanh từ màn hình chính</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📴</span>
+                <span>Hoạt động offline</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🔔</span>
+                <span>Nhận thông báo cập nhật</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">⚡</span>
+                <span>Tải trang nhanh hơn</span>
+            </div>
+        </div>
 
-  <aside class="sidebar" id="sidebar">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="w-10 h-10 bg-indigo-600 rounded-md flex items-center justify-center text-white font-bold">NV</div>
-      <div>
-        <div class="text-sm font-bold">Visa Guide</div>
-        <div class="text-xs text-gray-500">Cẩm nang Visa quốc tế</div>
-      </div>
-    </div>
-    
-    <nav class="space-y-1 text-sm">
-      <a href="#home" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="closeMenu()">🏠 Trang chủ</a>
-      
-      <div class="mt-2">
-        <button onclick="toggleSection('asia')" class="w-full flex items-center justify-between py-2 px-3 rounded hover:bg-indigo-50 transition-colors text-xs font-semibold text-gray-700">
-          <span>CHÂU Á</span>
-          <svg id="asia-icon" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
+        <button id="installBtn" class="install-btn">
+            <span>📲</span>
+            <span>Cài đặt ứng dụng</span>
         </button>
-        <div id="asia-list" class="ml-2 space-y-1 mt-1">
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết Azerbaijan sẽ được cập nhật sớm'); closeMenu();">🇦🇿 Azerbaijan - Georgia</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết Bhutan sẽ được cập nhật sớm'); closeMenu();">🇧🇹 Bhutan</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇧🇳 Brunei</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇰🇭 Campuchia</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇨🇳 Trung Quốc</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇮🇳 Ấn Độ</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇮🇩 Indonesia</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇯🇵 Nhật Bản</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇰🇵 Triều Tiên</a>
-          <a href="#" class="block py-2 px-3 rounded hover:bg-indigo-50 transition-colors" onclick="alert('Chi tiết sẽ được cập nhật sớm'); closeMenu();">🇰🇷 Hàn Quốc</a>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <div class="footer">
+            <p>Phiên bản 2.6 | Cẩm nang Visa Nhật Bản</p>
         </div>
-      </div>
-
-      <div class="border-t mt-4 pt-4 text-xs text-gray-500">
-        <p class="text-center">@Nhật - Phiên bản V2.4</p>
-        <p class="text-center mt-2">
-          <a href="./github/" class="text-indigo-600 hover:underline">Xem phiên bản đầy đủ →</a>
-        </p>
-      </div>
-    </nav>
-  </aside>
-
-  <main class="content-wrap" id="contentWrap">
-    <div class="container mx-auto px-2" style="max-width: 1200px;">
-      
-      <header id="home" class="text-center py-14 mt-14">
-        <h1 class="text-5xl font-bold mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-          Cẩm nang hồ sơ Visa quốc tế
-        </h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Tra cứu chi tiết yêu cầu hồ sơ visa theo từng quốc gia - Đầy đủ, chính xác, dễ hiểu
-        </p>
-        
-        <div class="mt-8 p-6 bg-white rounded-xl shadow-lg max-w-3xl mx-auto">
-          <h3 class="text-2xl font-bold text-indigo-700 mb-4">⚙️ Cài đặt ứng dụng</h3>
-          <p class="text-gray-700 mb-4">
-            Để trải nghiệm đầy đủ tính năng và sử dụng offline, vui lòng:
-          </p>
-          <ol class="list-decimal text-left ml-6 text-gray-700 space-y-2 mb-6">
-            <li>Nhấn vào nút <strong>"Cài đặt ứng dụng"</strong> hoặc biểu tượng <strong>⊕</strong> trên thanh địa chỉ</li>
-            <li>Chọn <strong>"Thêm vào màn hình chính"</strong> hoặc <strong>"Cài đặt"</strong></li>
-            <li>Mở ứng dụng từ màn hình chính của thiết bị</li>
-          </ol>
-          
-          <button id="installButton" class="hidden px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
-            📱 Cài đặt ứng dụng
-          </button>
-          
-          <div id="installInstructions" class="mt-4 p-4 bg-blue-50 rounded-lg text-left">
-            <p class="text-sm text-gray-700">
-              <strong>💡 Lưu ý:</strong> Nếu không thấy nút cài đặt, bạn có thể:
-            </p>
-            <ul class="list-disc ml-6 text-sm text-gray-600 mt-2 space-y-1">
-              <li><strong>Safari (iOS):</strong> Nhấn nút Chia sẻ → Thêm vào màn hình chính</li>
-              <li><strong>Chrome (Android):</strong> Nhấn menu ⋮ → Cài đặt ứng dụng</li>
-              <li><strong>Edge/Chrome (PC):</strong> Tìm biểu tượng ⊕ trên thanh địa chỉ</li>
-            </ul>
-          </div>
-          
-          <div class="mt-6">
-            <a href="./github/" class="inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all">
-              🌐 Truy cập phiên bản đầy đủ
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <div class="max-w-6xl mx-auto pb-12 px-4">
-        <section class="mb-12">
-          <div class="text-center p-8 bg-white rounded-2xl shadow-lg">
-            <div class="text-6xl mb-4">🌏</div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Khám phá cẩm nang Visa</h2>
-            <p class="text-gray-600 mb-6">
-              Phiên bản đầy đủ bao gồm hướng dẫn chi tiết cho hơn 50 quốc gia trên toàn thế giới
-            </p>
-            <a href="./github/" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105">
-              Xem tất cả quốc gia →
-            </a>
-          </div>
-        </section>
-      </div>
-
     </div>
-  </main>
 
-<script>
-// Menu toggle
-const menuToggle = document.getElementById('menuToggle');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
+    <script>
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        const statusMessage = document.getElementById('statusMessage');
 
-function toggleMenu() {
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('active');
-  menuToggle.classList.toggle('shifted');
-}
+        // Function to show status message
+        function showStatus(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+        }
 
-function closeMenu() {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('active');
-  menuToggle.classList.remove('shifted');
-}
+        // Check if app is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            installBtn.classList.add('hidden');
+            showStatus('✅ Ứng dụng đã được cài đặt!', 'success');
+        }
 
-menuToggle.addEventListener('click', toggleMenu);
-overlay.addEventListener('click', closeMenu);
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('beforeinstallprompt event fired');
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.classList.remove('hidden');
+        });
 
-// Toggle section
-function toggleSection(sectionId) {
-  const list = document.getElementById(sectionId + '-list');
-  const icon = document.getElementById(sectionId + '-icon');
-  
-  if (list.style.display === 'none' || !list.style.display) {
-    list.style.display = 'block';
-    icon.style.transform = 'rotate(180deg)';
-  } else {
-    list.style.display = 'none';
-    icon.style.transform = 'rotate(0deg)';
-  }
-}
+        // Install button click handler
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) {
+                showStatus('⚠️ Trình duyệt không hỗ trợ cài đặt hoặc ứng dụng đã được cài đặt', 'info');
+                return;
+            }
 
-// PWA Installation
-let deferredPrompt;
-const installButton = document.getElementById('installButton');
+            // Show loading state
+            installBtn.innerHTML = '<div class="loading"></div><span>Đang cài đặt...</span>';
+            installBtn.disabled = true;
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installButton.classList.remove('hidden');
-});
+            try {
+                // Show install prompt
+                deferredPrompt.prompt();
+                
+                // Wait for user choice
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    showStatus('✅ Cài đặt thành công! Ứng dụng đã được thêm vào màn hình chính', 'success');
+                    installBtn.classList.add('hidden');
+                } else {
+                    showStatus('ℹ️ Bạn đã hủy cài đặt. Bạn có thể cài đặt lại bất cứ lúc nào!', 'info');
+                    installBtn.innerHTML = '<span>📲</span><span>Cài đặt ứng dụng</span>';
+                    installBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Installation error:', error);
+                showStatus('❌ Có lỗi xảy ra khi cài đặt. Vui lòng thử lại!', 'info');
+                installBtn.innerHTML = '<span>📲</span><span>Cài đặt ứng dụng</span>';
+                installBtn.disabled = false;
+            }
 
-installButton.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response: ${outcome}`);
-    deferredPrompt = null;
-    installButton.classList.add('hidden');
-  }
-});
+            deferredPrompt = null;
+        });
 
-window.addEventListener('appinstalled', () => {
-  console.log('PWA đã được cài đặt thành công');
-  deferredPrompt = null;
-});
-</script>
+        // Listen for app installed event
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            showStatus('✅ Ứng dụng đã được cài đặt thành công!', 'success');
+            installBtn.classList.add('hidden');
+            deferredPrompt = null;
+        });
 
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('./github/sw.js');
+                    console.log('Service Worker registered successfully:', registration.scope);
+                } catch (error) {
+                    console.error('Service Worker registration failed:', error);
+                }
+            });
+        }
+
+        // Auto redirect to main app after installation (optional)
+        window.addEventListener('appinstalled', () => {
+            setTimeout(() => {
+                // Uncomment the line below if you want auto redirect
+                // window.location.href = './github/index.html';
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
