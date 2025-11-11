@@ -2,8 +2,8 @@
   "name": "Nhật-Visa | Cẩm nang hồ sơ Visa quốc tế",
   "short_name": "Nhật-Visa",
   "description": "Tra cứu chi tiết yêu cầu hồ sơ visa theo từng quốc gia",
-  "start_url": "./github/index.html",
-  "scope": "./github/",
+  "start_url": ".index.html",
+  "scope": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
@@ -14,13 +14,13 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "github/icons/icon-72x72.png",
+      "src": "icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "github/icons/icon-96x96.png",
+      "src": "icons/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
@@ -32,31 +32,31 @@
       "purpose": "any"
     },
     {
-      "src": "github/icons/icon-144x144.png",
+      "src": "icons/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "github/icons/icon-152x152.png",
+      "src": "icons/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "github/icons/icon-192x192.png",
+      "src": "icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "github/icons/icon-384x384.png",
+      "src": "icons/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "github/icons/icon-512x512.png",
+      "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -70,7 +70,7 @@
       "form_factor": "narrow"
     },
     {
-      "src": "github/screenshots/screenshot-2.png",
+      "src": "screenshots/screenshot-2.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide"
@@ -87,5 +87,6 @@
   }
 
 }
+
 
 
