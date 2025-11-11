@@ -4,10 +4,10 @@ const RUNTIME_CACHE = 'nhat-visa-runtime';
 
 const PRECACHE_URLS = [
   './',
-  './index.html',
-  './manifest.json',
-  './icons/icon-192x192.png',
-  './icons/icon-512x512.png'
+  './github/index.html',
+  './github/manifest.json',
+  './github/icons/icon-192x192.png',
+  './github/icons/icon-512x512.png'
   // BỎ CDN Tailwind vì nó không cache được
 ];
 
@@ -82,7 +82,7 @@ self.addEventListener('fetch', (event) => {
             
             // Return offline page for navigation requests
             if (event.request.mode === 'navigate') {
-              return caches.match('./index.html');
+              return caches.match('./github/index.html');
             }
           });
       })
@@ -115,8 +115,8 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: event.data ? event.data.text() : 'Có thông tin visa mới!',
-    icon: './icons/icon-192x192.png',
-    badge: './icons/icon-72x72.png',
+    icon: './github/icons/icon-192x192.png',
+    badge: './github/icons/icon-72x72.png',
     vibrate: [200, 100, 200],
     tag: 'visa-notification',
     actions: [
@@ -166,3 +166,4 @@ self.addEventListener('message', (event) => {
   }
 
 });
+
