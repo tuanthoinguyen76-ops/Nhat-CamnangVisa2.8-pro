@@ -2,7 +2,7 @@
   "name": "Nhật-Visa | Cẩm nang hồ sơ Visa quốc tế",
   "short_name": "Nhật-Visa",
   "description": "Tra cứu chi tiết yêu cầu hồ sơ visa theo từng quốc gia",
-  "start_url": ".index.html",
+  "start_url": "./index.html",
   "scope": ".",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -87,6 +87,7 @@
   }
 
 }
+
 
 
 
