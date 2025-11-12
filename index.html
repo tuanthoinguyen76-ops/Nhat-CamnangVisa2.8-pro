@@ -229,7 +229,7 @@
         <div id="statusMessage" class="status-message"></div>
 
         <div class="footer">
-            <p>Phiên bản 2.6 | Cẩm nang Visa</p>
+            <p>Phiên bản 2.8 | Cẩm nang Visa</p>
         </div>
     </div>
 
@@ -302,6 +302,62 @@
             deferredPrompt = null;
         });
 
+         // Detect platform
+  function detectPlatform() {
+    const ua = navigator.userAgent.toLowerCase();
+    
+    if (/iphone|ipad|ipod/.test(ua)) {
+      return 'ios';
+    } else if (/android/.test(ua)) {
+      return 'android';
+    } else if (/windows/.test(ua)) {
+      return 'windows';
+    } else if (/mac/.test(ua)) {
+      return 'macos';
+    } else {
+      return 'desktop';
+    }
+  }
+
+  // Show platform-specific instructions
+  function showPlatformInstructions(platform) {
+    const instructions = {
+      ios: `
+        <strong>📱 Cài đặt trên iOS (iPhone/iPad):</strong><br><br>
+        1. Nhấn nút <strong>Chia sẻ</strong> ⬆️ (ở dưới cùng)<br>
+        2. Cuộn xuống → chọn <strong>"Thêm vào Màn hình chính"</strong><br>
+        3. Nhấn <strong>"Thêm"</strong> → Hoàn tất!<br><br>
+        Icon sẽ xuất hiện trên màn hình chính giống app thật.
+      `,
+      android: `
+        <strong>📱 Cài đặt trên Android:</strong><br><br>
+        1. Mở <strong>Menu</strong> (⋮) góc trên bên phải<br>
+        2. Chọn <strong>"Thêm vào màn hình chính"</strong><br>
+        3. Hoặc <strong>"Cài đặt ứng dụng"</strong><br><br>
+        App sẽ cài như ứng dụng thật, không cần Google Play!
+      `,
+      windows: `
+        <strong>💻 Cài đặt trên Windows:</strong><br><br>
+        1. Nhấn biểu tượng <strong>⊕ Cài đặt</strong> trên thanh địa chỉ<br>
+        2. Hoặc Menu (⋮) → <strong>"Cài đặt Nhật-Visa..."</strong><br>
+        3. Nhấn <strong>"Cài đặt"</strong><br><br>
+        App sẽ mở như phần mềm desktop riêng!
+      `,
+      macos: `
+        <strong>💻 Cài đặt trên Mac:</strong><br><br>
+        <strong>Trên Chrome/Edge:</strong><br>
+        1. Nhấn biểu tượng <strong>⊕ Cài đặt</strong> trên thanh địa chỉ<br>
+        2. Hoặc Menu → <strong>"Cài đặt Nhật-Visa..."</strong><br><br>
+        <strong>Trên Safari:</strong><br>
+        File → Thêm vào Dock
+      `,
+      desktop: `
+        <strong>💻 Cài đặt trên máy tính:</strong><br><br>
+        1. Nhấn biểu tượng <strong>⊕ Cài đặt</strong> trên thanh địa chỉ<br>
+        2. Hoặc vào Menu trình duyệt → <strong>"Cài đặt"</strong><br>
+        3. App sẽ mở trong cửa sổ riêng!
+      `
+    };
         // Register service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', async () => {
@@ -324,5 +380,6 @@
     </script>
 </body>
 </html>
+
 
 
