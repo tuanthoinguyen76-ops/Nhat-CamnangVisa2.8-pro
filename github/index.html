@@ -389,6 +389,287 @@
       background: #667eea;
       border-radius: 4px;
     }
+
+/* AI Assistant Styles */
+.ai-assistant-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.ai-assistant-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+}
+
+.ai-assistant-toggle svg {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.ai-notification {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+.ai-chat-panel {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 400px;
+  max-width: calc(100vw - 2rem);
+  height: 600px;
+  max-height: calc(100vh - 4rem);
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 1002;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+.ai-chat-panel.active {
+  display: flex;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-chat-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.ai-avatar {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ai-close:hover {
+  background: rgba(255,255,255,0.3);
+  transform: rotate(90deg);
+}
+
+.ai-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ai-message {
+  display: flex;
+  gap: 0.75rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.ai-message-bot {
+  align-self: flex-start;
+}
+
+.ai-message-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.ai-message-content {
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 80%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.ai-message-user .ai-message-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.ai-chat-input {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ai-chat-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.ai-chat-input input:focus {
+  border-color: #667eea;
+}
+
+.ai-voice-btn, .ai-send-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ai-voice-btn:hover, .ai-send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.ai-voice-btn.recording {
+  background: #ef4444;
+  animation: recordPulse 1s ease-in-out infinite;
+}
+
+@keyframes recordPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.ai-suggestions {
+  padding: 0.75rem 1rem;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.ai-suggestions button {
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ai-suggestions button:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.ai-typing {
+  display: flex;
+  gap: 4px;
+  padding: 1rem;
+}
+
+.ai-typing span {
+  width: 8px;
+  height: 8px;
+  background: #667eea;
+  border-radius: 50%;
+  animation: typing 1.4s ease-in-out infinite;
+}
+
+.ai-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ai-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+  .ai-assistant-toggle {
+    bottom: 1rem;
+    right: 1rem;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .ai-chat-panel {
+    bottom: 1rem;
+    right: 1rem;
+    width: calc(100vw - 2rem);
+    height: calc(100vh - 2rem);
+  }
+}
 </style>
 
 
@@ -402,6 +683,85 @@
       <line x1="3" y1="18" x2="21" y2="18"></line>
     </svg>
   </button>
+<!-- AI Assistant Button -->
+<button class="ai-assistant-toggle" id="aiToggle" aria-label="Trợ lý AI">
+  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </svg>
+  <span class="ai-notification" id="aiNotification" style="display:none;">1</span>
+</button>
+
+<!-- AI Chat Panel -->
+<div class="ai-chat-panel" id="aiChatPanel">
+  <div class="ai-chat-header">
+    <div class="flex items-center gap-3">
+      <div class="ai-avatar">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="font-bold text-white">Trợ lý Visa AI</h3>
+        <p class="text-xs text-blue-100">Hỏi tôi về hồ sơ visa</p>
+      </div>
+    </div>
+    <button class="ai-close" onclick="toggleAIChat()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="ai-chat-messages" id="aiMessages">
+    <div class="ai-message ai-message-bot">
+      <div class="ai-message-content">
+        <p>👋 Xin chào! Tôi là trợ lý AI. Tôi có thể giúp bạn:</p>
+        <ul class="mt-2 space-y-1 text-sm">
+          <li>🔍 Tìm kiếm thông tin hồ sơ visa</li>
+          <li>📋 Hướng dẫn chuẩn bị giấy tờ</li>
+          <li>💬 Trả lời câu hỏi về visa</li>
+          <li>🎤 Nhận diện giọng nói</li>
+        </ul>
+        <p class="mt-2">Hãy hỏi tôi bất cứ điều gì!</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ai-chat-input">
+    <button class="ai-voice-btn" id="voiceBtn" onclick="toggleVoiceRecognition()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+      </svg>
+    </button>
+    <input 
+      type="text" 
+      id="aiInput" 
+      placeholder="Nhập câu hỏi hoặc nhấn mic..." 
+      onkeypress="handleAIInput(event)"
+    />
+    <button class="ai-send-btn" onclick="sendAIMessage()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="ai-suggestions">
+    <button onclick="sendQuickQuestion('Hồ sơ tài chính visa Pháp cần gì?')">
+      💰 Hồ sơ tài chính
+    </button>
+    <button onclick="sendQuickQuestion('Visa Nhật cần bao nhiêu tiền?')">
+      💴 Chi phí visa
+    </button>
+    <button onclick="sendQuickQuestion('Thời gian xét duyệt visa Mỹ?')">
+      ⏱️ Thời gian xét duyệt
+    </button>
+  </div>
+</div>
+
 
   <div class="overlay" id="overlay"></div>
 <aside class="sidebar" id="sidebar">
@@ -8378,6 +8738,348 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 });
+
+// ==================== AI ASSISTANT ====================
+
+let recognition = null;
+let isRecording = false;
+
+// Initialize Speech Recognition
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.lang = 'vi-VN';
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById('aiInput').value = transcript;
+    sendAIMessage();
+  };
+  
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+    showAIMessage('Xin lỗi, tôi không nghe rõ. Vui lòng thử lại.', 'bot');
+  };
+  
+  recognition.onend = () => {
+    isRecording = false;
+    document.getElementById('voiceBtn').classList.remove('recording');
+  };
+}
+
+// Toggle AI Chat
+function toggleAIChat() {
+  const panel = document.getElementById('aiChatPanel');
+  const toggle = document.getElementById('aiToggle');
+  const notification = document.getElementById('aiNotification');
+  
+  if (panel.classList.contains('active')) {
+    panel.classList.remove('active');
+    toggle.style.display = 'flex';
+  } else {
+    panel.classList.add('active');
+    toggle.style.display = 'none';
+    notification.style.display = 'none';
+  }
+}
+
+// Initialize AI Toggle
+document.getElementById('aiToggle').addEventListener('click', toggleAIChat);
+
+// Toggle Voice Recognition
+function toggleVoiceRecognition() {
+  if (!recognition) {
+    alert('Trình duyệt của bạn không hỗ trợ nhận diện giọng nói.');
+    return;
+  }
+  
+  const voiceBtn = document.getElementById('voiceBtn');
+  
+  if (isRecording) {
+    recognition.stop();
+    isRecording = false;
+    voiceBtn.classList.remove('recording');
+  } else {
+    recognition.start();
+    isRecording = true;
+    voiceBtn.classList.add('recording');
+    showAIMessage('🎤 Đang lắng nghe...', 'bot');
+  }
+}
+
+// Handle AI Input
+function handleAIInput(event) {
+  if (event.key === 'Enter') {
+    sendAIMessage();
+  }
+}
+
+// Send AI Message
+function sendAIMessage() {
+  const input = document.getElementById('aiInput');
+  const message = input.value.trim();
+  
+  if (!message) return;
+  
+  // Show user message
+  showAIMessage(message, 'user');
+  input.value = '';
+  
+  // Show typing indicator
+  showTypingIndicator();
+  
+  // Process message and respond
+  setTimeout(() => {
+    removeTypingIndicator();
+    processAIQuery(message);
+  }, 1000);
+}
+
+// Send Quick Question
+function sendQuickQuestion(question) {
+  document.getElementById('aiInput').value = question;
+  sendAIMessage();
+}
+
+// Show AI Message
+function showAIMessage(content, sender) {
+  const messagesDiv = document.getElementById('aiMessages');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `ai-message ai-message-${sender}`;
+  
+  messageDiv.innerHTML = `
+    <div class="ai-message-content">
+      ${content}
+    </div>
+  `;
+  
+  messagesDiv.appendChild(messageDiv);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Show Typing Indicator
+function showTypingIndicator() {
+  const messagesDiv = document.getElementById('aiMessages');
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'ai-message ai-message-bot';
+  typingDiv.id = 'typingIndicator';
+  
+  typingDiv.innerHTML = `
+    <div class="ai-message-content">
+      <div class="ai-typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  `;
+  
+  messagesDiv.appendChild(typingDiv);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Remove Typing Indicator
+function removeTypingIndicator() {
+  const indicator = document.getElementById('typingIndicator');
+  if (indicator) {
+    indicator.remove();
+  }
+}
+
+// Process AI Query
+function processAIQuery(query) {
+  const lowerQuery = query.toLowerCase();
+  
+  // Detect country
+  const countries = {
+    'pháp': 'france',
+    'france': 'france',
+    'ý': 'italy',
+    'italy': 'italy',
+    'đức': 'germany',
+    'germany': 'germany',
+    'tây ban nha': 'spain',
+    'spain': 'spain',
+    'na uy': 'norway',
+    'norway': 'norway',
+    'nhật': 'japan',
+    'nhật bản': 'japan',
+    'japan': 'japan',
+    'hàn quốc': 'southkorea',
+    'hàn': 'southkorea',
+    'korea': 'southkorea',
+    'mỹ': 'usa',
+    'usa': 'usa',
+    'úc': 'australia',
+    'australia': 'australia'
+  };
+  
+  let detectedCountry = null;
+  for (const [keyword, country] of Object.entries(countries)) {
+    if (lowerQuery.includes(keyword)) {
+      detectedCountry = country;
+      break;
+    }
+  }
+  
+  // Search for specific information
+  if (lowerQuery.includes('hồ sơ') || lowerQuery.includes('giấy tờ') || lowerQuery.includes('cần gì')) {
+    handleDocumentQuery(detectedCountry, lowerQuery);
+  } else if (lowerQuery.includes('tài chính') || lowerQuery.includes('tiền') || lowerQuery.includes('chi phí')) {
+    handleFinancialQuery(detectedCountry);
+  } else if (lowerQuery.includes('thời gian') || lowerQuery.includes('xét duyệt') || lowerQuery.includes('bao lâu')) {
+    handleTimeQuery(detectedCountry);
+  } else if (lowerQuery.includes('nơi nộp') || lowerQuery.includes('đâu')) {
+    handleLocationQuery(detectedCountry);
+  } else if (detectedCountry) {
+    openCountryModal(detectedCountry);
+  } else {
+    showAIMessage('Tôi có thể giúp bạn tìm hiểu về hồ sơ visa các quốc gia. Bạn muốn hỏi về nước nào?', 'bot');
+  }
+}
+
+// Handle Document Query
+function handleDocumentQuery(country, query) {
+  if (!country) {
+    showAIMessage('Vui lòng cho tôi biết bạn muốn xin visa nước nào? (Ví dụ: Pháp, Nhật, Mỹ, v.v.)', 'bot');
+    return;
+  }
+  
+  let response = `<p><strong>Hồ sơ visa ${getCountryName(country)}:</strong></p><ul class="mt-2 space-y-1 text-sm">`;
+  
+  if (query.includes('cá nhân') || query.includes('chung')) {
+    response += `
+      <li>📋 CCCD/CMND</li>
+      <li>📋 Hộ chiếu còn hạn ≥ 6 tháng</li>
+      <li>📋 2 ảnh 2.5x3.5cm</li>
+      <li>📋 Giấy xác nhận cư trú</li>
+    `;
+  }
+  
+  if (query.includes('tài chính')) {
+    response += `
+      <li>💰 Sao kê ngân hàng 3 tháng</li>
+      <li>💰 Sổ tiết kiệm (nếu có)</li>
+      <li>💰 Xác nhận lương</li>
+    `;
+  }
+  
+  if (query.includes('công việc')) {
+    response += `
+      <li>💼 Hợp đồng lao động</li>
+      <li>💼 Xác nhận công việc</li>
+      <li>💼 Thư nghỉ phép</li>
+    `;
+  }
+  
+  response += `</ul><p class="mt-3">Bạn có muốn xem chi tiết đầy đủ không?</p>`;
+  
+  showAIMessage(response, 'bot');
+  showAIMessage(`<button onclick="openCountryModal('${country}')" class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">📖 Xem chi tiết ${getCountryName(country)}</button>`, 'bot');
+}
+
+// Handle Financial Query
+function handleFinancialQuery(country) {
+  if (!country) {
+    showAIMessage('Bạn muốn hỏi về tài chính visa nước nào?', 'bot');
+    return;
+  }
+  
+  const response = `
+    <p><strong>Hồ sơ tài chính ${getCountryName(country)}:</strong></p>
+    <ul class="mt-2 space-y-1 text-sm">
+      <li>💰 Số dư tối thiểu: 100-150 triệu/người</li>
+      <li>💰 Sao kê 3 tháng gần nhất</li>
+      <li>💰 Nguồn thu nhập ổn định</li>
+      <li>💰 Thời gian có tiền ≥ 3-6 tháng</li>
+    </ul>
+    <p class="mt-3 text-yellow-600">⚠️ Lưu ý: Không nên mở sổ mới ngay trước khi nộp!</p>
+  `;
+  
+  showAIMessage(response, 'bot');
+  showAIMessage(`<button onclick="openCountryModal('${country}')" class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">📖 Xem chi tiết tài chính</button>`, 'bot');
+}
+
+// Handle Time Query
+function handleTimeQuery(country) {
+  if (!country) {
+    showAIMessage('Bạn muốn hỏi về thời gian xét duyệt visa nước nào?', 'bot');
+    return;
+  }
+  
+  const timeData = {
+    'france': '15-20 ngày',
+    'italy': '15 ngày',
+    'germany': '15-20 ngày',
+    'spain': '15-20 ngày',
+    'norway': '15-20 ngày',
+    'japan': '5-7 ngày',
+    'southkorea': '5-10 ngày',
+    'usa': '4-6 tuần',
+    'australia': '15-30 ngày'
+  };
+  
+  const time = timeData[country] || '15-30 ngày';
+  
+  const response = `
+    <p><strong>⏱️ Thời gian xét duyệt visa ${getCountryName(country)}:</strong></p>
+    <p class="mt-2 text-lg font-bold text-indigo-600">${time}</p>
+    <p class="mt-2 text-sm text-gray-600">Thời gian có thể thay đổi tùy theo từng hồ sơ và thời điểm nộp.</p>
+  `;
+  
+  showAIMessage(response, 'bot');
+}
+
+// Handle Location Query
+function handleLocationQuery(country) {
+  if (!country) {
+    showAIMessage('Bạn muốn hỏi về nơi nộp hồ sơ visa nước nào?', 'bot');
+    return;
+  }
+  
+  showAIMessage(`Đang tìm thông tin nơi nộp hồ sơ visa ${getCountryName(country)}...`, 'bot');
+  openCountryModal(country);
+}
+
+// Open Country Modal
+function openCountryModal(country) {
+  const modal = document.getElementById(`modal-${country}`);
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    showAIMessage(`✅ Đã mở thông tin chi tiết về visa ${getCountryName(country)}!`, 'bot');
+    toggleAIChat();
+  } else {
+    showAIMessage(`Xin lỗi, tôi chưa có thông tin chi tiết về ${getCountryName(country)}. Vui lòng kiểm tra menu bên trái.`, 'bot');
+  }
+}
+
+// Get Country Name
+function getCountryName(countryCode) {
+  const names = {
+    'france': 'Pháp',
+    'italy': 'Ý',
+    'germany': 'Đức',
+    'spain': 'Tây Ban Nha',
+    'norway': 'Na Uy',
+    'japan': 'Nhật Bản',
+    'southkorea': 'Hàn Quốc',
+    'usa': 'Mỹ',
+    'australia': 'Úc'
+  };
+  return names[countryCode] || countryCode;
+}
+
+// Show notification
+function showAINotification() {
+  const notification = document.getElementById('aiNotification');
+  notification.style.display = 'flex';
+  setTimeout(() => {
+    notification.style.display = 'none';
+  }, 3000);
+}
   </script>
 <!-- PWA Installer -->
 <script src="./pwa-installer.js"></script>
